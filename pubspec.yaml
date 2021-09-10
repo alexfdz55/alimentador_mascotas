@@ -1,0 +1,28 @@
+name: alimentador_mascote
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies: 
+  cupertino_icons: ^1.0.2
+  shared_preferences: ^2.0.6
+  font_awesome_flutter: ^9.0.0
+  intro_views_flutter: ^3.2.0
+  web_socket_channel: ^2.1.0
+  google_nav_bar: ^5.0.5
+  get: 4.3.8
+  flutter: 
+    sdk: flutter
+
+dev_dependencies: 
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  uses-material-design: true
+
+  assets:
+    - assets/
+
