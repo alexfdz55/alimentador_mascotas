@@ -15,7 +15,7 @@ class HeaderHome extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: responsive.height - 520,
+          height: responsive.height - 620,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(50),
@@ -26,7 +26,7 @@ class HeaderHome extends StatelessWidget {
           ),
         ),
         Container(
-          height: responsive.height - 520,
+          height: responsive.height - 620,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(50),
@@ -34,7 +34,7 @@ class HeaderHome extends StatelessWidget {
               color: Colors.black.withOpacity(0.60)),
           child: Center(
             child: Text(
-              'Alimentador de Mascote',
+              'Rotina de refeições',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 40,

@@ -1,12 +1,16 @@
 import 'package:alimentador_mascote/app/modules/configuracion/components/card_recomedacion.dart';
 import 'package:alimentador_mascote/app/modules/configuracion/components/hora_comida_widget.dart';
 import 'package:alimentador_mascote/app/modules/configuracion/components/tilte_input.dart';
+import 'package:alimentador_mascote/app/modules/configuracion/components/time_widget.dart';
+import 'package:alimentador_mascote/app/modules/configuracion/views/rutina_comidas.dart';
+import 'package:alimentador_mascote/app/shared/theme/theme_dark.dart';
 
 import 'package:alimentador_mascote/app/shared/widgets/button_personalizado.dart';
 import 'package:alimentador_mascote/app/shared/widgets/custom_page.dart';
 import 'package:alimentador_mascote/app/shared/widgets/textfield_custom_New1.dart';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 
@@ -22,68 +26,159 @@ class EntrarDatosView extends GetView<ConfiguracionController> {
       init: ConfiguracionController(),
       builder: (_) => CustomPage(
         isBack: true,
-        title: 'Recomenda-se',
+        title: this.infoText == '' ? '' : 'Recomenda-se',
         child: Container(
-            // height: 200,
-            // color: Colors.red,
-            child: SingleChildScrollView(
-          child: Column(
-            children: [
-              CardRecomdacion(text: this.infoText),
-              TitleInput(
-                text:
-                    'Insira a quantidade de ração a ser servida em cada refeição?(em gramas)',
-              ),
-              TextFieldCustom(
-                  controller: _.pesoTextController,
-                  textValidation: '',
-                  textInputType: TextInputType.number,
-                  icon: Icons.food_bank_outlined,
-                  onChanged: () {}),
-              TitleInput(
-                text: 'Insira a quantidade de refeições diárias',
-              ),
-              // SizedBox(height: 30),
-              TextFieldCustom(
-                  controller: _.comidasTextController,
-                  // hintText: 'Quantidade de refeições no dia',
-                  textValidation: '',
-                  textInputType: TextInputType.number,
-                  icon: Icons.food_bank_outlined,
-                  onChanged: () {
-                    int n = 0;
-                    final c = _.comidasTextController.text.toString();
-                    if (c == '') {
-                      n = 0;
-                      _.horasComidas = [];
-                      _.update();
-                    }
-
-                    if (c == '0') {
-                      _.horasComidas = [];
-                      _.update();
-                    } else {
-                      n = int.parse(_.comidasTextController.text.toString());
-                      for (var i = 1; i < n + 1; i++) {
-                        _.horasComidas.add(HoraComida(index: i));
-                      }
-                      _.update();
-                    }
+            child: Column(
+          children: [
+            this.infoText == ''
+                ? Container()
+                : CardRecomdacion(text: this.infoText),
+            TitleInput(
+              text:
+                  'Insira a quantidade de ração a ser servida em cada refeição?(em gramas)',
+            ),
+            TextFieldCustom(
+                controller: _.pesoTextController,
+                textValidation: '',
+                textInputType: TextInputType.number,
+                icon: FontAwesomeIcons.utensils,
+                onChanged: () {
+                  _.saveDatos();
+                }),
+            TitleInput(text: 'Insira a quantidade de refeições diárias'),
+            // SizedBox(height: 30),
+            TextFieldCustom(
+                controller: _.comidasTextController,
+                // hintText: 'Quantidade de refeições no dia',
+                textValidation: '',
+                textInputType: TextInputType.number,
+                icon: FontAwesomeIcons.question,
+                onChanged: () {
+                  _.saveDatos();
+                  if (_.comidasTextController.text != '')
                     FocusScope.of(context).requestFocus(new FocusNode());
-                  }),
-              SizedBox(height: 40),
-              Column(children: _.horasComidas),
-              SizedBox(height: 20),
-              ButtonAzul(
-                  color:
-                      _.horasComidas.length == 0 ? Colors.grey : Colors.green,
-                  title: 'Configurar',
-                  onPressed: () {}),
-              SizedBox(height: 100),
-            ],
-          ),
+                }),
+            SizedBox(height: 20),
+            // ButtonAzul(
+            //   paddingH: 50,
+            //   fontSize: 16,
+            //   height: 50,
+            //   color: kPrimaryColor,
+            //   title: 'Configurar horas',
+            //   onPressed: () => customDialog(
+            //     title: 'Horas',
+            //     action: () {},
+            //     child: _HorasDialog(),
+            //   ),
+            // ),
+            // SizedBox(height: 40),
+            Expanded(child: _HorasDialog())
+          ],
         )),
       ),
     );
   }
+}
+
+class _HorasDialog extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<ConfiguracionController>(
+      init: ConfiguracionController(),
+      id: 'horarios',
+      builder: (_) => ListView.builder(
+          itemBuilder: (__, index) {
+            return Column(
+              children: [
+                HoraComida(index: index + 1),
+                (index + 1 == _.cantidadComidas)
+                    ? Column(
+                        children: [
+                          ButtonAzul(
+                              color: _.horas.length == 0
+                                  ? Colors.grey
+                                  : Colors.green,
+                              title: 'Configurar',
+                              onPressed: () => Get.to(RutinaComidaView())),
+                          SizedBox(height: 40),
+                        ],
+                      )
+                    : Container()
+              ],
+            );
+          },
+          itemCount: _.cantidadComidas),
+    );
+  }
+}
+
+class _CustomContainer extends StatelessWidget {
+  final Widget child;
+
+  const _CustomContainer({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+      padding: EdgeInsets.symmetric(vertical: 10),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.0),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+                color: Colors.black26,
+                blurRadius: 4.0,
+                spreadRadius: 1.0,
+                offset: Offset(1.0, 4.0)),
+          ],
+          //color: Colors.white.withAlpha(180),
+          color: Get.theme.canvasColor),
+      height: 70,
+      child: this.child,
+    );
+  }
+}
+
+customDialog({
+  String title = '',
+  required Widget child,
+  bool error = true,
+  required Function action,
+  bool dismissible = true,
+}) {
+  Get.dialog(
+    AlertDialog(
+      scrollable: true,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      title: Text(
+        title,
+        style: TextStyle(color: Colors.green, fontSize: 28),
+        textAlign: TextAlign.center,
+      ),
+      content: Column(
+        //crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          child
+          //SettingsWidget()
+        ],
+      ),
+      actions: <Widget>[
+        ButtonAzul(
+            color: Get.theme.primaryColor,
+            title: 'Aceptar',
+            height: 40,
+            fontSize: 15,
+            onPressed: () {
+              Get.back();
+              action();
+            })
+        // TextButton(
+        //     child: Text('Aceptar'),
+        //     onPressed: () {
+        //       Get.back();
+        //     }),
+      ],
+    ),
+    barrierDismissible: dismissible,
+  );
 }

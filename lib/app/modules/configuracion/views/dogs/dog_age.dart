@@ -1,7 +1,8 @@
+import 'package:alimentador_mascote/app/models/dog_models.dart';
 import 'package:alimentador_mascote/app/modules/configuracion/controllers/configuracion_controller.dart';
-import 'package:alimentador_mascote/app/modules/configuracion/views/configuracion_view.dart';
+import 'package:alimentador_mascote/app/modules/configuracion/views/dogs/dog_moths_view.dart';
 import 'package:alimentador_mascote/app/modules/configuracion/views/entrar_datos_view.dart';
-import 'package:alimentador_mascote/app/modules/configuracion/views/perros/dog_moths_view.dart';
+
 import 'package:alimentador_mascote/app/shared/theme/theme_dark.dart';
 import 'package:alimentador_mascote/app/shared/widgets/custom_button.dart';
 import 'package:alimentador_mascote/app/shared/widgets/custom_page.dart';
@@ -12,10 +13,16 @@ import 'package:get/get.dart';
 
 class DogAgeView extends GetView<ConfiguracionController> {
   final List<String> edades;
+  final List<String> portes;
+  final String porte;
 
-  DogAgeView(this.edades);
+  DogAgeView({required this.edades, required this.portes, required this.porte});
   @override
   Widget build(BuildContext context) {
+    final dog = Dog();
+    String info = '';
+
+    print(porte);
     final icon2 = Icons.watch_later;
     return CustomPage(
       isBack: true,
@@ -23,14 +30,27 @@ class DogAgeView extends GetView<ConfiguracionController> {
       child: ListView.builder(
         itemBuilder: (__, index) {
           return BotonGordo(
-              sizeIcon: 20,
+              sizeIcon: index * 10 + 20,
               icon: FontAwesomeIcons.dog,
               icon2: icon2,
               sizeIcon2: 100,
               color1: kPrimaryColor,
               texto: edades[index],
               onPress: () {
-                Get.to(index == 0 ? DogMothsView() : EntrarDatosView(''));
+                if (index == 0) {
+                  Get.to(DogMothsView());
+                } else {
+                  if (porte == portes[0]) {
+                    info = dog.infoPequeno[edades[index]]!;
+                  } else if (porte == portes[1]) {
+                    info = dog.infoMedio[edades[index]]!;
+                  } else if (porte == portes[2]) {
+                    info = dog.infoGrande[edades[index]]!;
+                  } else if (porte == portes[3]) {
+                    info = dog.infoGigante[edades[index]]!;
+                  }
+                  Get.to(EntrarDatosView(info));
+                }
               });
         },
         itemCount: edades.length,

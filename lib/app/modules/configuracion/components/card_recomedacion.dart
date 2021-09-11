@@ -8,7 +8,7 @@ class CardRecomdacion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Get.theme.canvasColor,
+      color: Colors.white.withOpacity(0.2),
       margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 20,

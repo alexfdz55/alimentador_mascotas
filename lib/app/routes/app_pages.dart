@@ -20,7 +20,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.CONFIGURACION;
+  static const INITIAL = Routes.BOTTOM_NAVIGATION;
 
   static final routes = [
     GetPage(

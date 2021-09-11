@@ -24,75 +24,67 @@ class PreferenciasUsuario {
     _prefs.setBool('isFirstInitApp', value);
   }
 
-  // String get lastName {
-  //   return _prefs.getString('lastName') ?? '';
+  bool get isDog {
+    return _prefs.getBool('isDog') ?? true;
+  }
+
+  set isDog(bool value) {
+    _prefs.setBool('isDog', value);
+  }
+
+  bool get isCat {
+    return _prefs.getBool('isCat') ?? true;
+  }
+
+  set isCat(bool value) {
+    _prefs.setBool('isCat', value);
+  }
+
+  bool get isOther {
+    return _prefs.getBool('isOther') ?? true;
+  }
+
+  set isOther(bool value) {
+    _prefs.setBool('isOther', value);
+  }
+
+  double get pesoComida {
+    return _prefs.getDouble('pesoComida') ?? 0.0;
+  }
+
+  set pesoComida(double value) {
+    _prefs.setDouble('pesoComida', value);
+  }
+
+  int get cantidadComidas {
+    return _prefs.getInt('cantidadComidas') ?? 0;
+  }
+
+  set cantidadComidas(int value) {
+    _prefs.setInt('cantidadComidas', value);
+  }
+
+  double get pesoComidaDiario {
+    return _prefs.getDouble('pesoComidaDiario') ?? 0.0;
+  }
+
+  set pesoComidaDiario(double value) {
+    _prefs.setDouble('pesoComidaDiario', value);
+  }
+
+  List<String> get horas {
+    return _prefs.getStringList('horas') ?? [];
+  }
+
+  set horas(List<String> value) {
+    _prefs.setStringList('horas', value);
+  }
+
+  // setListData(String key, List<String> value) async {
+  //   _prefs.setStringList(key, value);
   // }
 
-  // set lastName(String value) {
-  //   _prefs.setString('lastName', value);
-  // }
-
-  // String get email {
-  //   return _prefs.getString('email') ?? '';
-  // }
-
-  // set email(String value) {
-  //   _prefs.setString('email', value);
-  // }
-
-  // String get uid {
-  //   return _prefs.getString('uid') ?? '';
-  // }
-
-  // set uid(String value) {
-  //   _prefs.setString('uid', value);
-  // }
-
-  // String get urlAvatar {
-  //   return _prefs.getString('urlAvatar') ?? '';
-  // }
-
-  // set urlAvatar(String value) {
-  //   _prefs.setString('urlAvatar', value);
-  // }
-
-  // String get rol {
-  //   return _prefs.getString('rol') ?? '';
-  // }
-
-  // set rol(String value) {
-  //   _prefs.setString('rol', value);
-  // }
-
-  // String get phone {
-  //   return _prefs.getString('phone') ?? '';
-  // }
-
-  // set phone(String value) {
-  //   _prefs.setString('phone', value);
-  // }
-
-  // String get notification {
-  //   return _prefs.getString('notification') ?? '';
-  // }
-
-  // set notification(String value) {
-  //   _prefs.setString('notification', value);
-  // }
-
-  // String get firebaseToken {
-  //   return _prefs.getString('firebaseToken') ?? '';
-  // }
-
-  // set firebaseToken(String value) {
-  //   _prefs.setString('firebaseToken', value);
-  // }
-
-  // String get otpPin {
-  //   return _prefs.getString('otpPin') ?? '';
-  // }
-
-  // set otpPin(String value) {
-  //   _prefs.setString('otpPin', value);
+  // Future<List<String>> getListData(String key) async {
+  //   return _prefs.getStringList(key)!;
   // }
 }

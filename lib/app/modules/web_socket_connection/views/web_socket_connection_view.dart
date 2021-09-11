@@ -6,14 +6,41 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:web_socket_channel/io.dart';
 
-class WebSocketEspView extends StatefulWidget {
+class WebSocketEspView extends StatelessWidget {
   @override
-  State<StatefulWidget> createState() {
-    return _WebSocketEspView();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: FractionalOffset(0.0, 0.3),
+                end: FractionalOffset(0.0, 1.0),
+                colors: [
+                  Color(0xFF1D2F53),
+                  Color(0xFF111927),
+                ],
+              ),
+            ),
+          ),
+          ConfiEspWifi()
+        ],
+      ),
+    );
   }
 }
 
-class _WebSocketEspView extends State<WebSocketEspView> {
+class ConfiEspWifi extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _ConfiEspWifi();
+  }
+}
+
+class _ConfiEspWifi extends State<ConfiEspWifi> {
   late String temp; //variable for temperature
   late String humidity; //variable for humidity
   late String heatindex; //variable for heatindex
@@ -130,6 +157,7 @@ class _WebSocketEspView extends State<WebSocketEspView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         leading: Icon(Icons.wifi),
         centerTitle: true,

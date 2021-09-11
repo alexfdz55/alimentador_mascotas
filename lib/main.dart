@@ -1,3 +1,4 @@
+import 'package:alimentador_mascote/app/modules/bottom_navigation/views/tabs_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -24,8 +25,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: darkThemeData(),
       //home: prefs.isFirstInitApp ? IntroView() : BottomNavigationView(),
-      initialRoute: AppPages.INITIAL,
-      getPages: AppPages.routes,
+      home: TabsPage(),
+
+      // initialRoute: AppPages.INITIAL,
+      // getPages: AppPages.routes,
     );
   }
 }

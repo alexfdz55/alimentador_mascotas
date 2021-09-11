@@ -50,6 +50,7 @@ class _TextFieldCustomState extends State<TextFieldCustom> {
             fillColor: Colors.grey.withOpacity(0.5),
             focusColor: Colors.green,
             prefixIcon: Icon(widget.icon, size: 20, color: Colors.white),
+            hintText: '0',
             hintStyle:
                 TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
             suffixIcon: widget.password ? buttonShowPassword() : null,

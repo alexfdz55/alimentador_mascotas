@@ -1,6 +1,6 @@
 import 'package:alimentador_mascote/app/models/dog_models.dart';
 import 'package:alimentador_mascote/app/modules/configuracion/controllers/configuracion_controller.dart';
-import 'package:alimentador_mascote/app/modules/configuracion/views/perros/dog_age.dart';
+import 'package:alimentador_mascote/app/modules/configuracion/views/dogs/dog_age.dart';
 import 'package:alimentador_mascote/app/shared/theme/theme_dark.dart';
 import 'package:alimentador_mascote/app/shared/widgets/custom_button.dart';
 import 'package:alimentador_mascote/app/shared/widgets/custom_page.dart';
@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 class DogSizeView extends GetView<ConfiguracionController> {
   final dog = Dog();
   final portes = Dog().porte;
+  List<String> portesList = [];
   String porte = '';
   @override
   Widget build(BuildContext context) {
@@ -23,11 +24,13 @@ class DogSizeView extends GetView<ConfiguracionController> {
           for (var k in portes[index].keys) {
             // k -> portes
             porte = k;
+            portesList.add(k);
             //print(k);
           }
+          // print(portesList);
           // print(portes[index[]]);
           return BotonGordo(
-              sizeIcon: 20,
+              sizeIcon: index * 10 + 20,
               icon: FontAwesomeIcons.dog,
               color1: kPrimaryColor,
               texto: porte,
@@ -38,7 +41,11 @@ class DogSizeView extends GetView<ConfiguracionController> {
                   // a -> listas de cada  porte
                   //print(edades);
                 }
-                Get.to(DogAgeView(edades!));
+                Get.to(DogAgeView(
+                  edades: edades!,
+                  portes: portesList,
+                  porte: portesList[index],
+                ));
               });
         },
         itemCount: portes.length,

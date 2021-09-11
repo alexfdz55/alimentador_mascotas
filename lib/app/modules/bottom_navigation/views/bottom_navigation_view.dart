@@ -1,3 +1,4 @@
+import 'package:alimentador_mascote/app/modules/configuracion/views/configuracion_view.dart';
 import 'package:alimentador_mascote/app/modules/home/views/home_view.dart';
 import 'package:alimentador_mascote/app/modules/infos/views/infos_view.dart';
 import 'package:alimentador_mascote/app/modules/web_socket_connection/views/web_socket_connection_view.dart';
@@ -104,7 +105,7 @@ class _BottomNavigationViewState extends State<BottomNavigationView> {
       case 2:
         this.isAddBtnVisible = true;
         //this.setState(() {});
-        return InfosView();
+        return ConfiguracionView();
     }
   }
 
