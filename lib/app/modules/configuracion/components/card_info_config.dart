@@ -1,5 +1,6 @@
 import 'package:alimentador_mascote/app/shared/responisve/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CardInfoConfig extends StatelessWidget {
   final IconData icon;
@@ -17,8 +18,12 @@ class CardInfoConfig extends StatelessWidget {
   Widget build(BuildContext context) {
     final responsive = Responsive(context);
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 16),
+      margin: EdgeInsets.only(top: 10, bottom: 10, right: 10),
       decoration: BoxDecoration(
+        border: Border.all(
+            color: this.config == '0.0 g' ? Colors.red : Get.theme.primaryColor,
+            width: 3),
+
         borderRadius: BorderRadius.circular(20.0),
         boxShadow: <BoxShadow>[
           BoxShadow(
@@ -56,7 +61,7 @@ class CardInfoConfig extends StatelessWidget {
                       offset: Offset(1.0, 4.0)),
                 ],
                 //color: Colors.white.withAlpha(180),
-                color: Colors.green.shade700,
+                color: Get.theme.primaryColor,
               ),
               child: Center(
                   child: Text(

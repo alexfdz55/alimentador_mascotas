@@ -1,7 +1,7 @@
+import 'package:alimentador_mascote/app/modules/bottom_navigation/views/tabs_page.dart';
 import 'package:get/get.dart';
 
 import 'package:alimentador_mascote/app/modules/bottom_navigation/bindings/bottom_navigation_binding.dart';
-import 'package:alimentador_mascote/app/modules/bottom_navigation/views/bottom_navigation_view.dart';
 import 'package:alimentador_mascote/app/modules/configuracion/bindings/configuracion_binding.dart';
 import 'package:alimentador_mascote/app/modules/configuracion/views/configuracion_view.dart';
 import 'package:alimentador_mascote/app/modules/home/bindings/home_binding.dart';
@@ -30,7 +30,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.BOTTOM_NAVIGATION,
-      page: () => BottomNavigationView(),
+      page: () => TabsPage(),
       binding: BottomNavigationBinding(),
     ),
     GetPage(

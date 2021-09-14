@@ -3,6 +3,8 @@ import 'package:alimentador_mascote/app/modules/configuracion/components/hora_co
 import 'package:alimentador_mascote/app/modules/configuracion/components/tilte_input.dart';
 import 'package:alimentador_mascote/app/modules/configuracion/components/time_widget.dart';
 import 'package:alimentador_mascote/app/modules/configuracion/views/rutina_comidas.dart';
+import 'package:alimentador_mascote/app/modules/home/controllers/home_controller.dart';
+import 'package:alimentador_mascote/app/shared/responisve/responsive.dart';
 import 'package:alimentador_mascote/app/shared/theme/theme_dark.dart';
 
 import 'package:alimentador_mascote/app/shared/widgets/button_personalizado.dart';
@@ -22,59 +24,62 @@ class EntrarDatosView extends GetView<ConfiguracionController> {
   EntrarDatosView(this.infoText);
   @override
   Widget build(BuildContext context) {
+    final responsive = Responsive(context);
     return GetBuilder<ConfiguracionController>(
       init: ConfiguracionController(),
       builder: (_) => CustomPage(
         isBack: true,
         title: this.infoText == '' ? '' : 'Recomenda-se',
-        child: Container(
-            child: Column(
-          children: [
-            this.infoText == ''
-                ? Container()
-                : CardRecomdacion(text: this.infoText),
-            TitleInput(
-              text:
-                  'Insira a quantidade de ração a ser servida em cada refeição?(em gramas)',
-            ),
-            TextFieldCustom(
-                controller: _.pesoTextController,
-                textValidation: '',
-                textInputType: TextInputType.number,
-                icon: FontAwesomeIcons.utensils,
-                onChanged: () {
-                  _.saveDatos();
-                }),
-            TitleInput(text: 'Insira a quantidade de refeições diárias'),
-            // SizedBox(height: 30),
-            TextFieldCustom(
-                controller: _.comidasTextController,
-                // hintText: 'Quantidade de refeições no dia',
-                textValidation: '',
-                textInputType: TextInputType.number,
-                icon: FontAwesomeIcons.question,
-                onChanged: () {
-                  _.saveDatos();
-                  if (_.comidasTextController.text != '')
-                    FocusScope.of(context).requestFocus(new FocusNode());
-                }),
-            SizedBox(height: 20),
-            // ButtonAzul(
-            //   paddingH: 50,
-            //   fontSize: 16,
-            //   height: 50,
-            //   color: kPrimaryColor,
-            //   title: 'Configurar horas',
-            //   onPressed: () => customDialog(
-            //     title: 'Horas',
-            //     action: () {},
-            //     child: _HorasDialog(),
-            //   ),
-            // ),
-            // SizedBox(height: 40),
-            Expanded(child: _HorasDialog())
-          ],
-        )),
+        child: SingleChildScrollView(
+          child: Container(
+              child: Column(
+            children: [
+              this.infoText == ''
+                  ? Container()
+                  : CardRecomdacion(text: this.infoText),
+              TitleInput(
+                text:
+                    'Insira a quantidade de ração a ser servida em cada refeição?(em gramas)',
+              ),
+              TextFieldCustom(
+                  controller: _.pesoTextController,
+                  textValidation: '',
+                  textInputType: TextInputType.number,
+                  icon: FontAwesomeIcons.utensils,
+                  onChanged: () {
+                    _.saveDatos();
+                  }),
+              TitleInput(text: 'Insira a quantidade de refeições diárias'),
+              // SizedBox(height: 30),
+              TextFieldCustom(
+                  controller: _.comidasTextController,
+                  // hintText: 'Quantidade de refeições no dia',
+                  textValidation: '',
+                  textInputType: TextInputType.number,
+                  icon: FontAwesomeIcons.question,
+                  onChanged: () {
+                    _.saveDatos();
+                    if (_.comidasTextController.text != '')
+                      FocusScope.of(context).requestFocus(new FocusNode());
+                  }),
+              SizedBox(height: 10),
+
+              TitleInput(text: 'Horas de refeições'),
+              Container(
+                  //color: Colors.red,
+                  height: responsive.wp(45) * 1.4,
+                  child: _HorasDialog()),
+              ButtonAzul(
+                color: _.horas.length == 0 ? Colors.grey : Colors.green,
+                title: 'Configurar',
+                onPressed: () => Get.to(
+                  RutinaComidaView(),
+                ),
+              ),
+              SizedBox(height: 10),
+            ],
+          )),
+        ),
       ),
     );
   }
@@ -86,28 +91,39 @@ class _HorasDialog extends StatelessWidget {
     return GetBuilder<ConfiguracionController>(
       init: ConfiguracionController(),
       id: 'horarios',
-      builder: (_) => ListView.builder(
-          itemBuilder: (__, index) {
-            return Column(
-              children: [
-                HoraComida(index: index + 1),
-                (index + 1 == _.cantidadComidas)
-                    ? Column(
-                        children: [
-                          ButtonAzul(
-                              color: _.horas.length == 0
-                                  ? Colors.grey
-                                  : Colors.green,
-                              title: 'Configurar',
-                              onPressed: () => Get.to(RutinaComidaView())),
-                          SizedBox(height: 40),
-                        ],
-                      )
-                    : Container()
-              ],
-            );
-          },
-          itemCount: _.cantidadComidas),
+      builder: (_) => ListView.separated(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        // controller: scrollController,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) => HoraComida(index: index + 1),
+        itemCount: _.cantidadComidas, /////allCategories.length,
+        separatorBuilder: (_, index) => SizedBox(
+          width: 5,
+        ),
+      ),
+
+      // ListView.builder(
+      //     itemBuilder: (__, index) {
+      //       return Column(
+      //         children: [
+      //           HoraComida(index: index + 1),
+      //           (index + 1 == _.cantidadComidas)
+      //               ? Column(
+      //                   children: [
+      //                     ButtonAzul(
+      //                         color: _.horas.length == 0
+      //                             ? Colors.grey
+      //                             : Colors.green,
+      //                         title: 'Configurar',
+      //                         onPressed: () => Get.to(RutinaComidaView())),
+      //                     SizedBox(height: 40),
+      //                   ],
+      //                 )
+      //               : Container()
+      //         ],
+      //       );
+      //     },
+      //     itemCount: _.cantidadComidas),
     );
   }
 }

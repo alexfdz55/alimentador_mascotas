@@ -1,4 +1,4 @@
-import 'package:alimentador_mascote/app/modules/bottom_navigation/views/bottom_navigation_view.dart';
+import 'package:alimentador_mascote/app/modules/bottom_navigation/views/tabs_page.dart';
 import 'package:alimentador_mascote/app/modules/intro_page/controllers/intro_controller.dart';
 import 'package:alimentador_mascote/app/shared/share_prefs/preferencias_usuario.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +27,7 @@ class IntroView extends StatelessWidget {
             prefs.isFirstInitApp = false;
             // Use Navigator.pushReplacement if you want to dispose the latest route
             // so the user will not be able to slide back to the Intro Views.
-            Get.off(BottomNavigationView());
+            Get.off(TabsPage());
           },
           pageButtonTextStyles: const TextStyle(
             color: Colors.white,

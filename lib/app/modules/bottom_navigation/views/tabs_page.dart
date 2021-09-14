@@ -1,4 +1,5 @@
 import 'package:alimentador_mascote/app/modules/bottom_navigation/components/tab_navigation_item.dart';
+import 'package:alimentador_mascote/app/shared/theme/theme_dark.dart';
 import 'package:flutter/material.dart';
 
 class TabsPage extends StatefulWidget {
@@ -21,7 +22,7 @@ class _TabsPageState extends State<TabsPage> {
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.pinkAccent,
+          selectedItemColor: kSecondaryColor,
           backgroundColor: Color(0xFF111927),
           currentIndex: _currentIndex,
           onTap: (int index) => setState(() => _currentIndex = index),

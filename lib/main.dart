@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Hora da ração',
       theme: darkThemeData(),
       //home: prefs.isFirstInitApp ? IntroView() : BottomNavigationView(),
       home: TabsPage(),

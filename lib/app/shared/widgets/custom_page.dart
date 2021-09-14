@@ -81,7 +81,7 @@ class CustomPage extends StatelessWidget {
               ),
               Positioned(
                 right: 20,
-                child: Image.asset('assets/icon.png', width: 50, height: 50),
+                child: Image.asset('assets/logo.png', width: 50, height: 50),
               ),
             ],
           ),

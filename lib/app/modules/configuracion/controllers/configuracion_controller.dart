@@ -1,9 +1,11 @@
+import 'package:alimentador_mascote/app/modules/home/controllers/home_controller.dart';
 import 'package:alimentador_mascote/app/shared/share_prefs/preferencias_usuario.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class ConfiguracionController extends GetxController {
   final prefs = PreferenciasUsuario();
+  final homeController = Get.put(HomeController());
   late TextEditingController comidasTextController;
   late TextEditingController pesoTextController;
   int cantidadComidas = 0;
@@ -11,17 +13,13 @@ class ConfiguracionController extends GetxController {
 
   List<String> horas = [];
 
-  List<String> horasTime = [];
-
-  String timeStart = '';
+  // String timeStart = '';
   DateTime initHour = DateTime(
       DateTime.now().year, DateTime.now().month, DateTime.now().day, 7, 0);
 
-  List<Widget> horasComidas = [];
-
   @override
   void onInit() {
-    print(prefs.horas);
+    print('prefs.horas: ${prefs.horas}');
     cantidadComidas = prefs.cantidadComidas;
     print('cantidad de comidas ${cantidadComidas}');
 
@@ -41,7 +39,7 @@ class ConfiguracionController extends GetxController {
 
     pesoTextController = TextEditingController(text: pesoComida.toString());
 
-    print(prefs.horas.toString());
+    print('prefs.horas: ${prefs.horas}');
     super.onInit();
   }
 
@@ -75,14 +73,15 @@ class ConfiguracionController extends GetxController {
       cantidadComidas = int.parse(comidasTextController.text);
     }
 
-    final items = List<String>.generate(cantidadComidas, (i) => '----');
+    final items = List<String>.generate(cantidadComidas, (i) => '__ : __');
     horas = items;
     prefs.horas = horas;
-    print(prefs.horas);
+    print('prefs.horas generadas: ${prefs.horas} ');
 
     prefs.pesoComida = pesoComida;
     prefs.cantidadComidas = cantidadComidas;
     prefs.pesoComidaDiario = prefs.pesoComida * prefs.cantidadComidas;
+    homeController.update();
 
     update(['horarios']);
   }

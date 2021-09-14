@@ -1,4 +1,5 @@
 import 'package:alimentador_mascote/app/modules/configuracion/views/cats/cat_age_view.dart';
+import 'package:alimentador_mascote/app/modules/configuracion/views/cats/cat_castrado.dart';
 import 'package:alimentador_mascote/app/modules/configuracion/views/dogs/dog_size_view.dart';
 import 'package:alimentador_mascote/app/modules/configuracion/views/entrar_datos_view.dart';
 import 'package:alimentador_mascote/app/shared/theme/theme_dark.dart';
@@ -36,7 +37,7 @@ class TipoMascotaView extends GetView<ConfiguracionController> {
                   texto: 'Gato',
                   onPress: () {
                     _.setCat();
-                    Get.to(CatAgeView());
+                    Get.to(CatCastradoView());
                   }),
               BotonGordo(
                   icon: Icons.pets,
