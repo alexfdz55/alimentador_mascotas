@@ -18,11 +18,11 @@ class TabNavigationItem {
   });
 
   static List<TabNavigationItem> get items => [
-        TabNavigationItem(
-          page: WebSocketEspView(),
-          icon: Icon(Icons.wifi),
-          title: Text("Conexão"),
-        ),
+        // TabNavigationItem(
+        //   page: WebSocketEspView(),
+        //   icon: Icon(Icons.wifi),
+        //   title: Text("Conexão"),
+        // ),
         TabNavigationItem(
           page: HomeView(),
           icon: Icon(FontAwesomeIcons.home),

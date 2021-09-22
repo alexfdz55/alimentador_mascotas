@@ -47,10 +47,10 @@ class CardInfoConfig extends StatelessWidget {
           trailing: Container(
               constraints: BoxConstraints(
                 maxHeight: 40,
-                maxWidth: 150,
+                maxWidth: 180,
               ),
               height: 40,
-              width: 80,
+              width: 100,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 boxShadow: <BoxShadow>[

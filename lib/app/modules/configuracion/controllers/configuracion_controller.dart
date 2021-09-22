@@ -4,8 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class ConfiguracionController extends GetxController {
-  final prefs = PreferenciasUsuario();
   final homeController = Get.put(HomeController());
+
+  final prefs = PreferenciasUsuario();
   late TextEditingController comidasTextController;
   late TextEditingController pesoTextController;
   int cantidadComidas = 0;
@@ -84,5 +85,12 @@ class ConfiguracionController extends GetxController {
     homeController.update();
 
     update(['horarios']);
+  }
+
+  sendData() {
+    homeController.setConfig(
+        peso: pesoComida.toString(),
+        cantidad: cantidadComidas.toString(),
+        horas: prefs.horas.toString());
   }
 }

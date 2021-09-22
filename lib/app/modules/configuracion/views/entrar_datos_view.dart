@@ -5,7 +5,6 @@ import 'package:alimentador_mascote/app/modules/configuracion/components/time_wi
 import 'package:alimentador_mascote/app/modules/configuracion/views/rutina_comidas.dart';
 import 'package:alimentador_mascote/app/modules/home/controllers/home_controller.dart';
 import 'package:alimentador_mascote/app/shared/responisve/responsive.dart';
-import 'package:alimentador_mascote/app/shared/theme/theme_dark.dart';
 
 import 'package:alimentador_mascote/app/shared/widgets/button_personalizado.dart';
 import 'package:alimentador_mascote/app/shared/widgets/custom_page.dart';
@@ -70,12 +69,14 @@ class EntrarDatosView extends GetView<ConfiguracionController> {
                   height: responsive.wp(45) * 1.4,
                   child: _HorasDialog()),
               ButtonAzul(
-                color: _.horas.length == 0 ? Colors.grey : Colors.green,
-                title: 'Configurar',
-                onPressed: () => Get.to(
-                  RutinaComidaView(),
-                ),
-              ),
+                  color: _.horas.length == 0 ? Colors.grey : Colors.green,
+                  title: 'Configurar',
+                  onPressed: () {
+                    _.sendData();
+                    Get.to(
+                      RutinaComidaView(),
+                    );
+                  }),
               SizedBox(height: 10),
             ],
           )),
